@@ -17,9 +17,28 @@ public class TestLibrary {
 		assertEquals(b.toString(), "Titel");
 		
 		lib.addMedium(b);
-		assertTrue(b.getId() != -1);
+		int id = b.getId();
+		assertTrue(id != -1);
 		
-		assertNotNull(lib.getMedium(b.getId()));
+		Medium m = lib.getMedium(id);
+		assertSame(m, b);
+		
+		assertTrue(m instanceof Book);
+		Book pm = (Book) m;
+		assertEquals(pm.getTitle(), "Titel");
+		assertEquals(pm.getAuthor(), "Autor");
+	}
+	@Test
+	public void testAddJournal(){
+		Journal b = new Journal("FAZ", "2/2018");
+		assertEquals(b.toString(), "FAZ");
+		
+		lib.addMedium(b);
+		
+		int id = b.getId();
+		assertTrue(id != -1);
+		
+		assertSame(lib.getMedium(id), b);
 	}
 	
 }

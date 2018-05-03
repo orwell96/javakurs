@@ -1,7 +1,7 @@
 
 public class Library {
 	
-	protected Book [] books;
+	protected Medium [] books;
 	protected int counter;
 	
 	/**
@@ -10,14 +10,14 @@ public class Library {
 	 */
 	public Library(int maximal){
 		this.counter=0;
-		this.books = new Book[maximal];
+		this.books = new Medium[maximal];
 	}
 	
 	/**
 	 * Nehme ein neues Medium in die Bibliothek auf.
 	 * @param m das aufzunehmende Medium
 	 */
-	public void addMedium(Book m){
+	public void addMedium(Medium m){
 		if (m==null){
 			throw new IllegalArgumentException("m is null");
 		}
@@ -43,7 +43,7 @@ public class Library {
 	 * @param id die ID des betreffenden Mediums
 	 * @return das betreffende Medium
 	 */
-	public Book getMedium(int id) {
+	public Medium getMedium(int id) {
 		if(id < 0 || id >= counter){
 			throw new IllegalIdException(id);
 		}
@@ -55,7 +55,7 @@ public class Library {
 	 * @param id die ID des betreffenden Mediums
 	 */
 	public void showDetail(int id) {
-		Book b = getMedium(id);
+		Medium b = getMedium(id);
 		System.out.println(b.getDetail());
 	}
 	

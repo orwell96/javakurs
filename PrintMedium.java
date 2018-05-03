@@ -20,4 +20,12 @@ public abstract class PrintMedium extends Medium {
 				+ "Titel: " + this.title + "\n"
 				+ "Author: " + this.author + "\n";
 	}
+	
+	public String getTitle(){
+		return this.title;
+	}
+	
+	public String getAuthor(){
+		return this.author;
+	}
 }
