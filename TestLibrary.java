@@ -41,4 +41,24 @@ public class TestLibrary {
 		assertSame(lib.getMedium(id), b);
 	}
 	
+	@Test
+	public void testAddCopy(){
+		Book b = new Book("CopyTest", "Autor", "1234567");
+		lib.addMedium(b);
+		Copy c = new Copy(125, b, "R11");
+		lib.addCopy(c);
+		
+		assertSame(lib.getCopy(125), c);
+		
+		try{
+			Copy d = new Copy(125, b, "R23");
+			lib.addCopy(d);
+			fail();
+		}catch(DuplicateIdException e){
+			
+		}catch(Exception e){
+			fail();
+		}
+	}
+	
 }

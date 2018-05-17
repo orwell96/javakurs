@@ -1,8 +1,13 @@
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Library {
 	
 	protected Medium [] books;
 	protected int counter;
+	
+	protected Map<Integer,Copy> copies;
 	
 	/**
 	 * Erstellt eine neue Bibliothek
@@ -11,6 +16,7 @@ public class Library {
 	public Library(int maximal){
 		this.counter=0;
 		this.books = new Medium[maximal];
+		copies = new HashMap<Integer,Copy>();
 	}
 	
 	/**
@@ -57,6 +63,35 @@ public class Library {
 	public void showDetail(int id) {
 		Medium b = getMedium(id);
 		System.out.println(b.getDetail());
+	}
+	
+	/**
+	 * Füge ein Exemplar (Copy) in die Bibliothek ein
+	 */
+	public void addCopy(Copy c){
+		if(copies.containsKey(c.getId())){
+			throw new DuplicateIdException(c.getId());
+		}
+		int mediumId = c.getMedium().getId();
+		if (mediumId == -1 || mediumId >= counter){
+			throw new RuntimeException("Medium is not registered in the library");
+		}else{
+			if (!this.books[mediumId].equals(c.getMedium())){
+				throw new RuntimeException("Medium is not registered in the library");
+			}
+		}
+		copies.put(c.getId(), c);
+	}
+	
+	/**
+	 * Erhalte ein Exemplar anhand der gegebenen Exemplar-id
+	 * @param id
+	 */
+	public Copy getCopy(int id){
+		if (!copies.containsKey(id)){
+			throw new IllegalIdException(id);
+		}
+		return copies.get(id);
 	}
 	
 	
